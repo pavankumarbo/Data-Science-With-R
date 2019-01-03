@@ -1,4 +1,4 @@
-#Imputing Missing Values in R
+# Imputing Missing Values in R
 **Should the missing values be imputed?** 
 Yes. Historically replacing missing values has been dealt in experiments and surveys. During surveys, Whenever possible, missing values are filled to completely analyze the data.
 The challenge is to estimate missing values that won't introduce new bias to the variable due to the values being imputed. Statisticians have developed many methods to solve this challenge.
