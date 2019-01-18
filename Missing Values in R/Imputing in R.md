@@ -22,8 +22,8 @@ They are:</br>
 **4.1.Missing Not at Random** </br>
     To diagnose this type of data, one needs to have domain knowledge in the area of dataset,
   This type of missing occurs when only a certain interval of all possible values of a variable are observed ,i.e; the missing values are  from different interval of the possible values than those that are observed.</br>
-  For example, in this [dataset](https://github.com/TrueCoder1/Data-Science-With-R/blob/master/data/nmar.csv), we can see 247 values of variable *Income* are missing and if we somehow know with high confidence that the missing  values are actually in the higher income category(i.e in the third quartile or right to that) but are missing in dataset. Then this type of missing is **Not Missing at Random**. In other words, missing values of Income variable are because of the high values fo income itself and doesnt depend on any other variable or observed values of Income.</br>
-  ![nmarData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/nmarIncome.png)</br>
+  For example, in this [dataset](https://github.com/TrueCoder1/Data-Science-With-R/tree/blob/master/data/nmar.csv), we can see 247 values of variable *Income* are missing and if we somehow know with high confidence that the missing  values are actually in the higher income category(i.e in the third quartile or right to that) but are missing in dataset. Then this type of missing is **Not Missing at Random**. In other words, missing values of Income variable are because of the high values fo income itself and doesnt depend on any other variable or observed values of Income.</br>
+  ![nmarData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/nmarIncome.png)</br>
   One needs to have domain knowledge to say that missing values are actually a particular category of that variable. These missing values are generally cannot be imputed using statistical methods.</br>
   We need to deal this type of data with either list-wise deletion, pair-wise deletion or removing the variabe itself. Analyst should decide which of these methods to use, to retain the value of the data as much as possible.</br>
   Although, you are free to explore selection models(heckman) and pattern mixture models if you badly feel the need to impute the variable with this missing type of data.</br>
@@ -31,22 +31,22 @@ They are:</br>
 **4.2.Missing Completely at Random**</br>
 This type of missing mechanism occurs when missing values are not *Not Missing at Random* and there is no particular pattern in missingness of data.</br>
   For example, In this [dataset](https://github.com/TrueCoder1/Data-Science-With-R/blob/master/data/mcar.csv), we can see that the missing values in variables *Age*, *Income* are not dependent on observed data of any other variable . Both Male and Female have equal share of missing *Age* values and hence there is no pattern or dependency in missingness of data. We should rule out *NMAR* case if we know that missing values of age are not because of either age being high value or low value.</br>
-  ![mcarFemaleData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/mcarFemaleAge.png)
-  ![mcarMaleData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/mcarMaleAge.png)</br>
+  ![mcarFemaleData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/mcarFemaleAge.png)
+  ![mcarMaleData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/mcarMaleAge.png)</br>
   
   Formal statistical methods cannot impute this type of missingness. We know that using list-wise deletion or pair-wise deletion introduces bias to the dataset. But we can use list-wise deletion to deal with this type of missing mechanism, becausemissingness is not associated with particular values of other variables and hence, there wont be great bias, provided, missing data is relatively small compared to dataset size.</br>
   
 **4.3.Missing At Random**</br>
   This type of missing mechanism is most commonly solved by statistical methods. To diagnose this type of data, We need to confirm first that the mechanism is not _Missing Not at Random_. And then we check if there is a pattern in the missing data such that, missing data is dependent on the values that are observed(non NA).</br>
   For example, in this [dataset](https://github.com/TrueCoder1/Data-Science-With-R/blob/master/data/mar.csv), we can see that 30% of females did not report their age where as all males have reported their age. If we are confident that ages of females who didn't report thier age is not out of range of interval of ages of females who have reported, we can eliminate the possibility of *Not Missing at Random* case. Since we see a pattern that missing values of "Age" are dependent on observed gender values(Female), we can rule out *MCAR* case and say that the missing mechanism is *Missing at Random* </br>.
-  ![marData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/marAge.png)</br>
+  ![marData](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/marAge.png)</br>
   
   
 **5.After checking for missingness type, How to impute?**
 
 There are some simple single imputing algorithms like:</br>
   **5.1.Mean Substitution** for continuous variables, which  means that substitute the missing values using mean. The disadvantage of this method is that it indtroduces bias as you can see from the following plot that it decrease variance introduces bias to the covariance matrix and brings the estimates of correlation coefficients between variables close to zero
-  ![meanSubsitution](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/meanImpute.png)</br>
+  ![meanSubsitution](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/meanImpute.png)</br>
   
   **5.2.Mode Substitution** for ordinal and nominal(categorical) variables. This method has same disadvantages as *Mean Substitution* method.
   
@@ -75,15 +75,15 @@ There are some simple single imputing algorithms like:</br>
   ```
   stripplot(imputed_result,pch=20,cex=1.2)
   ```
-  ![stripplot](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/stripplot.png)</br>
+  ![stripplot](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/stripplot.png)</br>
   ```
   densityplot(imputed_result)
   ```
-  ![densityplot](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/densityplot.png)</br>
+  ![densityplot](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/densityplot.png)</br>
   ```
   xyplot(imputed_result,Age~Gender)</br>
   ```
-  ![xyplot](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/xyplot.png)</br>
+  ![xyplot](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/xyplot.png)</br>
   
   To get complete imputed dataset:</br>
   ```
@@ -110,7 +110,7 @@ There are some simple single imputing algorithms like:</br>
   pooled_result <- pool(regressed_result)
   summary(pooled_result)
   ```
-  ![micesummaryregressed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/miceRegressedResult.png)</br>
+  ![micesummaryregressed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/miceRegressedResult.png)</br>
   MICE can also be used with MNAR data with some additional work.Given that the model fitted for imputed dataset is wrong for   missing cases due to MNAR, MICE provides a feature to alter the results of imputations according to the pattern in wrongness   of the model for missing cases. This is enabled using post argument(means post processing). More details can be found at:     section 6.2 of this [paper](https://www.jstatsoft.org/article/view/v045i03/v45i03.pdf)
   
   **5.5Imputation using Amelia**
@@ -127,14 +127,14 @@ To get complete imputed dataset:</br>
 ```
 amelia_impute$imputations[[5]]
 ```
-![ameliaImputed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/AmeliaImputeValues.png)</br>
+![ameliaImputed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/AmeliaImputeValues.png)</br>
 
  Data modelling with Amelia using all of the Multiple imputed datasets:</br>
  Similar to mice, if we want to perform analysis on all imputed datasets, we need to import and use "zelig" lbrary, and then:</br>
  ```
  amelia_regressed<- zelig(Income~Age, data=amelia_impute$imputations, model="normal")</br>
  ```
- ![ameliaRegressed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/AmeliaRegressed.png)</br>
+ ![ameliaRegressed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/AmeliaRegressed.png)</br>
  check [zelig](http://docs.zeligproject.org/articles/index.html#section-core-zelig-model-details) for models to chose from.</br>
   
   
@@ -152,4 +152,4 @@ amelia_impute$imputations[[5]]
    ```
    hmisc_impute$imputed
    ```
-   ![hmiscImputed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/images/hmiscImputeSummary.png)
+   ![hmiscImputed](https://raw.githubusercontent.com/TrueCoder1/Data-Science-With-R/master/Missing%20Values%20in%20R/images/hmiscImputeSummary.png)
